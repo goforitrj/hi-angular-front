@@ -15,20 +15,49 @@ import { timer } from "rxjs";
 export class TimeDisplayComponent implements OnInit {
   @Input() inputData;
 
-  test = 1;
+  min: number = 0;
+  sec: number = 0;
+  ms: number = 0;
+
+  timeInterval;
 
   constructor() {
     console.log(this.inputData);
-    // setInterval(() => {
-    //   this.test += 1;
-    //   // let timer = new timer();
-    //   // this.test = timer.time;
-    // }, 1000);
+  }
+
+  timeStart() {
+    this.timeInterval = setInterval(() => {
+      this.ms++;
+    }, 10);
+  }
+
+  timeStop() {
+    clearInterval(this.timeInterval);
+  }
+
+  timeReset() {
+    this.ms = 0;
   }
 
   ngOnInit(): void {}
 
   ngOnChanges(changes: SimpleChange) {
-    console.log(changes);
+    for (let propName in changes) {
+      if (propName === "inputData") {
+        switch (changes[propName].currentValue) {
+          case "start":
+            this.timeStart();
+            break;
+          case "stop":
+            this.timeStop();
+            break;
+          case "reset":
+            this.timeReset();
+            break;
+          default:
+            this.timeStop();
+        }
+      }
+    }
   }
 }

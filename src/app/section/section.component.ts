@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, SimpleChange } from "@angular/core";
 
 @Component({
   selector: "app-section",
@@ -8,11 +8,15 @@ import { Component, OnInit } from "@angular/core";
 export class SectionComponent implements OnInit {
   constructor() {}
 
-  present = "welcome";
+  present = 0;
 
   startTime($event) {
     this.present = $event;
   }
 
   ngOnInit(): void {}
+
+  ngOnChanges(changes: SimpleChange) {
+    console.log(changes);
+  }
 }

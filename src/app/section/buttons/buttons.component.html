@@ -1,12 +1,11 @@
 <p>
-  {{ count }}
-  <button class="start-btn" (click)="test($event)">
+  <button class="start-btn" (click)="executeButton('start')">
     start
   </button>
-  <button class="stop-btn" (click)="start()">
+  <button class="stop-btn" (click)="executeButton('stop')">
     stop
   </button>
-  <button class="reset-btn">
+  <button class="reset-btn" (click)="executeButton('reset')">
     reset
   </button>
 </p>
